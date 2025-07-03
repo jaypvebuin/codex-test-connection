@@ -1,6 +1,5 @@
 output "image_lambda_invoke_arn" {
-  # value = var.required_lambda_function ? aws_lambda_function.image_lambda_function[0].invoke_arn : null
-  value = length(aws_lambda_function.image_lambda_function) > 0 ? aws_lambda_function.image_lambda_function[0].invoke_arn : null
+  value = var.required_lambda_function ? aws_lambda_function.image_lambda_function[0].invoke_arn : null
 }
 
 # output "zip_lambda_invoke_arn" {
@@ -8,8 +7,7 @@ output "image_lambda_invoke_arn" {
 # }
 
 output "image_lambda_arn" {
-  # value = var.required_lambda_function ? aws_lambda_function.image_lambda_function[0].arn : null
-  value = length(aws_lambda_function.image_lambda_function) > 0 ? aws_lambda_function.image_lambda_function[0].invoke_arn : null
+  value = var.required_lambda_function ? aws_lambda_function.image_lambda_function[0].arn : null
 }
 
 # output "zip_lambda_arn" {
@@ -17,8 +15,7 @@ output "image_lambda_arn" {
 # }
 
 output "image_lambda_name" {
-  # value = var.required_lambda_function ? aws_lambda_function.image_lambda_function[0].function_name : null
-  value = length(aws_lambda_function.image_lambda_function) > 0 ? aws_lambda_function.image_lambda_function[0].invoke_arn : null
+  value = var.required_lambda_function ? aws_lambda_function.image_lambda_function[0].function_name : null
 }
 
 # output "zip_lambda_name" {

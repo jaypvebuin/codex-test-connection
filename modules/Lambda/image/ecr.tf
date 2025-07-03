@@ -1,24 +1,14 @@
 resource "aws_ecr_repository" "this" {
   count                = var.required_repo_for_image_lambda == true ? 1 : 0
-  name                 = var.Environment == "beta" ? "${lower(var.vendor)}-${lower(var.project_name)}-${lower(var.identifier)}-lambda-beta" : "${lower(var.vendor)}-${lower(var.project_name)}-${lower(var.identifier)}-lambda"
-  # name = "${lower(var.vendor)}-${lower(var.project_name)}-${lower(var.identifier)}-lambda"
+  name                 = "${lower(var.vendor)}-${lower(var.project_name)}-${lower(var.identifier)}-ecr-repo"
   image_tag_mutability = var.image_tag_mutability
 
   image_scanning_configuration {
     scan_on_push = var.scan_on_push
   }
-  provisioner "local-exec" {
-    command = join(";", [
-      "aws ecr get-login-password --region ${data.aws_region.current.name} | docker login --username AWS --password-stdin ${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com",
-      "docker pull alpine",
-      "docker tag alpine ${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.id}.amazonaws.com/${aws_ecr_repository.this[count.index].name}:latest",
-      "docker push ${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.id}.amazonaws.com/${aws_ecr_repository.this[count.index].name}:latest",
-    ])
-  }
   tags = {
-    Name    = "${lower(var.vendor)}-${lower(var.project_name)}-${lower(var.identifier)}-lambda"
-    purpose = "This ECR is used for ${var.identifier} lambda.",
-    module = var.module
+    Name = "${lower(var.vendor)}-${lower(var.project_name)}-${lower(var.identifier)}-ecr-repo"
+    Purpose = var.purpose
   }
 }
 

@@ -13,5 +13,5 @@ resource "aws_lambda_function_url" "image_function_url" {
       max_age           = try(cors.value.max_age, null)
     }
   }
-  depends_on = [aws_lambda_function.image_lambda_function]
+  depends_on = [ aws_lambda_function.image_lambda_function ]
 }

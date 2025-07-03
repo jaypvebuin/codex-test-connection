@@ -4,13 +4,13 @@ resource "aws_lambda_function" "zip_lambda_function" {
   role          = aws_iam_role.lambda_task_role.arn
   package_type  = "Zip"
   architectures = var.compatible_architectures
-  s3_bucket     = try(var.s3_bucket_name, aws_s3_bucket.this[0].id) #aws_s3_bucket.this[0].id
+  s3_bucket     = try(var.s3_bucket_name,aws_s3_bucket.this[0].id) #aws_s3_bucket.this[0].id
   s3_key        = var.s3_bucket_key
   layers        = var.required_lambda_layer == true ? [aws_lambda_layer_version.this[0].arn] : null
   memory_size   = var.memory_size
   timeout       = var.timeout
-  handler       = var.handler
-  runtime       = var.runtime
+  handler = var.handler
+  runtime = var.runtime
   dynamic "environment" {
     for_each = length(keys(var.environment_variables)) == 0 ? [] : [true]
     content {
@@ -34,5 +34,5 @@ resource "aws_lambda_function" "zip_lambda_function" {
       system_log_level      = var.logging_log_format == "Text" ? null : var.logging_system_log_level
     }
   }
-  depends_on = [aws_lambda_layer_version.this]
+  depends_on = [ aws_lambda_layer_version.this ]
 }

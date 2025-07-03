@@ -38,7 +38,7 @@ variable "compatible_architectures" {
 }
 
 variable "s3_bucket_name" {
-
+  
 }
 variable "s3_bucket_key" {
   type    = string
@@ -106,7 +106,7 @@ variable "description" {
 }
 
 variable "handler" {
-  type    = string
+  type = string
   default = null
 }
 
@@ -116,7 +116,7 @@ variable "runtime" {
 }
 
 variable "required_vpc_config" {
-  type    = bool
+  type = bool
   default = false
 }
 #------------ iam.tf ------------------
@@ -134,7 +134,7 @@ variable "required_lambda_layer" {
 }
 
 variable "required_bucket_for_lambda_layer" {
-  type    = bool
+  type = bool
   default = false
 }
 
@@ -195,7 +195,7 @@ variable "required_s3_bucket_for_zip_code" {
 #------------ sg.tf -------------------
 
 variable "required_sg_for_lambda" {
-  type    = bool
+  type = bool
   default = false
 }
 

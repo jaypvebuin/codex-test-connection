@@ -20,11 +20,6 @@ variable "identifier" {
   default = ""
 }
 
-variable "module" {
-  type    = string
-  default = ""
-}
-
 #------------ lambda.tf ---------------
 
 variable "required_lambda_function" {
@@ -113,7 +108,7 @@ variable "runtime" {
 }
 
 variable "required_vpc_config" {
-  type    = bool
+  type = bool
   default = false
 }
 #------------ iam.tf ------------------
@@ -182,7 +177,7 @@ variable "source_arn_of_principal" {
 #------------ sg.tf -------------------
 
 variable "required_sg_for_lambda" {
-  type    = bool
+  type = bool
   default = false
 }
 
@@ -201,11 +196,6 @@ variable "egress" {
   description = "Egress rules for the ECS security group."
   default     = [{}]
   type        = any
-}
-
-variable "kms_key_arn" {
-  type = string
-  default = null
 }
 
 
@@ -229,14 +219,10 @@ variable "scan_on_push" {
 }
 
 variable "purpose" {
-  type    = string
+  type = string
   default = "test"
 }
 
-# variable "ignored_lambda_fields" {
-#   type    = list(string)
-#   default = []
-# }
 
 
 

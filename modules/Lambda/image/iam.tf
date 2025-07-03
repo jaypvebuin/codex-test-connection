@@ -1,8 +1,7 @@
 # IAM role for the Lambda function
 # For custom policy, create it using IAM module and then pass its ARN into the variable in live folder.
 resource "aws_iam_role" "lambda_task_role" {
-  name               = var.Environment == "beta" ? "${lower(var.vendor)}-${lower(var.project_name)}-${lower(var.identifier)}-role-beta" : "${lower(var.vendor)}-${lower(var.project_name)}-${lower(var.identifier)}-role"
-  # name = "${lower(var.vendor)}-${lower(var.project_name)}-${lower(var.identifier)}-role"
+  name               = "${lower(var.vendor)}-${lower(var.project_name)}-${lower(var.identifier)}-role"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -19,9 +18,8 @@ resource "aws_iam_role" "lambda_task_role" {
 }
 EOF
   tags = {
-    Name    = var.Environment == "beta" ? "${lower(var.vendor)}-${lower(var.project_name)}-${lower(var.identifier)}-role-beta" : "${lower(var.vendor)}-${lower(var.project_name)}-${lower(var.identifier)}-role"
-    purpose = "This IAM role is used by ${var.identifier} lambda.",
-    module = var.module
+    Name = "${lower(var.vendor)}-${lower(var.project_name)}-${lower(var.identifier)}-role"
+    Purpose = var.purpose
   }
 }
 
